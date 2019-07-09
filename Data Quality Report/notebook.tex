@@ -1,0 +1,626 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{D14122782(DataQualityReport)}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{c+c1}{\PYZsh{} import pandas library}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         
+         \PY{c+c1}{\PYZsh{} load feature names from featureNames.txt file, set to list}
+         \PY{n}{featureNames} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}table}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{featureNames.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}
+         \PY{n}{featureNames} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{featureNames}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} read data}
+         \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DataSet.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} set column names to featureNames list}
+         \PY{n}{data}\PY{o}{.}\PY{n}{columns}\PY{o}{=}\PY{n}{featureNames}
+         \PY{c+c1}{\PYZsh{} fill missing values with \PYZsq{}?\PYZsq{} mark}
+         \PY{n}{data}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{?}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} only print first 5 rows}
+         \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:}     id  age          workclass  fnlwgt   education  education-num  \textbackslash{}
+         0  tr1   39          State-gov   77516   Bachelors             13   
+         1  tr2   50   Self-emp-not-inc   83311   Bachelors             13   
+         2  tr3   38            Private  215646     HS-grad              9   
+         3  tr4   53            Private  234721        11th              7   
+         4  tr5   28            Private  338409   Bachelors             13   
+         
+                 marital-status          occupation    relationship    race      sex  \textbackslash{}
+         0        Never-married        Adm-clerical   Not-in-family   White     Male   
+         1   Married-civ-spouse     Exec-managerial         Husband   White     Male   
+         2             Divorced   Handlers-cleaners   Not-in-family   White     Male   
+         3   Married-civ-spouse   Handlers-cleaners         Husband   Black     Male   
+         4   Married-civ-spouse      Prof-specialty            Wife   Black   Female   
+         
+            capital-gain  capital-loss  hours-per-week  native-country  target  
+         0          2174             0              40   United-States   <=50K  
+         1             0             0              13   United-States   <=50K  
+         2             0             0              40   United-States   <=50K  
+         3             0             0              40   United-States   <=50K  
+         4             0             0              40            Cuba   <=50K  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{c+c1}{\PYZsh{} generates descriptive statistics of the dataset, and transpose it}
+         \PY{n}{data}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}34}]:}                   count           mean            std      min       25\%  \textbackslash{}
+         age             30940.0      38.560763      13.639403     17.0      28.0   
+         fnlwgt          30940.0  189786.401422  105406.394386  12285.0  117849.0   
+         education-num   30940.0      10.081254       2.569967      1.0       9.0   
+         capital-gain    30940.0    1081.812993    7443.773041      0.0       0.0   
+         capital-loss    30940.0      86.569974     401.706023      0.0       0.0   
+         hours-per-week  30940.0      40.408920      12.336945      1.0      40.0   
+         
+                              50\%       75\%        max  
+         age                 37.0      48.0       90.0  
+         fnlwgt          178384.0  237318.0  1484705.0  
+         education-num       10.0      12.0       16.0  
+         capital-gain         0.0       0.0    99999.0  
+         capital-loss         0.0       0.0     4356.0  
+         hours-per-week      40.0      45.0       99.0  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{c+c1}{\PYZsh{} creating continuos features dataframe}
+         \PY{n}{continuous} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fnlwgt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{education\PYZhy{}num}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{capital\PYZhy{}gain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{capital\PYZhy{}loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hours\PYZhy{}per\PYZhy{}week}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} setting empty list for continuous features}
+         \PY{n}{cont\PYZus{}features}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} append all column names to the list}
+         \PY{n}{cont\PYZus{}features}\PY{o}{.}\PY{n}{extend}\PY{p}{(}\PY{n}{continuous}\PY{o}{.}\PY{n}{columns}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} getting data from \PYZsq{}data\PYZsq{} df to \PYZsq{}continuous\PYZsq{} df}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{cont\PYZus{}features}\PY{p}{:}
+             \PY{n}{continuous}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} the number of distinct values (cardinality)}
+         \PY{n}{cardinality}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{cont\PYZus{}features}\PY{p}{:}
+             \PY{n}{cardinality}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{continuous}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} find median of each features}
+         \PY{n}{median}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{cont\PYZus{}features}\PY{p}{:}
+             \PY{n}{median}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{continuous}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} find missing values of each features, but some features contains 0 values}
+         \PY{c+c1}{\PYZsh{} we need to find the percentage of them, then }
+         \PY{c+c1}{\PYZsh{} we can decide to accept them as a missing value or not }
+         \PY{n}{continuous}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{bool}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{30940}\PY{o}{*}\PY{l+m+mi}{100}
+         
+         \PY{c+c1}{\PYZsh{} the results below shows the percentages of zero values are small enough,}
+         \PY{c+c1}{\PYZsh{} that is why they are not considered as a missing value}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:} age               100.000000
+         fnlwgt            100.000000
+         education-num     100.000000
+         capital-gain        8.264383
+         capital-loss        4.621849
+         hours-per-week    100.000000
+         dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{c+c1}{\PYZsh{} find the missing values (percentage) of each features}
+         \PY{n}{missing}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{cont\PYZus{}features}\PY{p}{:}
+             \PY{n}{missing}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{continuous}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ ?}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{30940}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} create dataframe with new features}
+         \PY{n}{cont\PYZus{}describe} \PY{o}{=} \PY{n}{continuous}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+         
+         \PY{c+c1}{\PYZsh{} appen lists to new dataframe}
+         \PY{n}{cont\PYZus{}describe}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{card.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{cardinality}
+         \PY{n}{cont\PYZus{}describe}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{median}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{median}
+         \PY{n}{cont\PYZus{}describe}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{missing}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{missing}
+         \PY{n}{cont\PYZus{}describe}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Features}\PY{l+s+s1}{\PYZsq{}}
+         
+         \PY{c+c1}{\PYZsh{} testing}
+         \PY{n}{cont\PYZus{}describe}
+             
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}36}]:}                   count           mean            std      min       25\%  \textbackslash{}
+         Features                                                                   
+         age             30940.0      38.560763      13.639403     17.0      28.0   
+         fnlwgt          30940.0  189786.401422  105406.394386  12285.0  117849.0   
+         education-num   30940.0      10.081254       2.569967      1.0       9.0   
+         capital-gain    30940.0    1081.812993    7443.773041      0.0       0.0   
+         capital-loss    30940.0      86.569974     401.706023      0.0       0.0   
+         hours-per-week  30940.0      40.408920      12.336945      1.0      40.0   
+         
+                              50\%       75\%        max  card.    median  missing  
+         Features                                                                 
+         age                 37.0      48.0       90.0     72      37.0      0.0  
+         fnlwgt          178384.0  237318.0  1484705.0  20880  178384.0      0.0  
+         education-num       10.0      12.0       16.0     16      10.0      0.0  
+         capital-gain         0.0       0.0    99999.0    119       0.0      0.0  
+         capital-loss         0.0       0.0     4356.0     91       0.0      0.0  
+         hours-per-week      40.0      45.0       99.0     93      40.0      0.0  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{c+c1}{\PYZsh{} ordering}
+         \PY{n}{df\PYZus{}cont} \PY{o}{=} \PY{n}{cont\PYZus{}describe}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{missing}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{card.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{min}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{25}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{median}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{75}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{std}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+         \PY{n}{df\PYZus{}cont}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{Miss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Card}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Min}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1st Quart}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Median}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3rd Quart}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Max}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Std. Dev}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} send dataframe to .csv file}
+         \PY{n}{df\PYZus{}cont}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D14122782CONT.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} final result}
+         \PY{n}{df\PYZus{}cont}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}37}]:}                   Count  \%Miss   Card      Min  1st Quart           Mean  \textbackslash{}
+         Features                                                                   
+         age             30940.0    0.0     72     17.0       28.0      38.560763   
+         fnlwgt          30940.0    0.0  20880  12285.0   117849.0  189786.401422   
+         education-num   30940.0    0.0     16      1.0        9.0      10.081254   
+         capital-gain    30940.0    0.0    119      0.0        0.0    1081.812993   
+         capital-loss    30940.0    0.0     91      0.0        0.0      86.569974   
+         hours-per-week  30940.0    0.0     93      1.0       40.0      40.408920   
+         
+                           Median  3rd Quart        Max       Std. Dev  
+         Features                                                       
+         age                 37.0       48.0       90.0      13.639403  
+         fnlwgt          178384.0   237318.0  1484705.0  105406.394386  
+         education-num       10.0       12.0       16.0       2.569967  
+         capital-gain         0.0        0.0    99999.0    7443.773041  
+         capital-loss         0.0        0.0     4356.0     401.706023  
+         hours-per-week      40.0       45.0       99.0      12.336945  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{c+c1}{\PYZsh{} creating categorical features dataframe}
+         \PY{n}{categorical} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{workclass}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{education}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{marital\PYZhy{}status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{occupation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relationship}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{race}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{native\PYZhy{}country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} setting empty list for continuous features}
+         \PY{n}{cat\PYZus{}features}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} append all column names to the list}
+         \PY{n}{cat\PYZus{}features}\PY{o}{.}\PY{n}{extend}\PY{p}{(}\PY{n}{categorical}\PY{o}{.}\PY{n}{columns}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} getting data from \PYZsq{}data\PYZsq{} df to \PYZsq{}categorica\PYZsq{} df}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{cat\PYZus{}features}\PY{p}{:}
+             \PY{n}{categorical}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+             
+         \PY{c+c1}{\PYZsh{} describe df and transpose it  }
+         \PY{n}{cat\PYZus{}describe}\PY{o}{=}\PY{n}{categorical}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{n}{include}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{all}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+         \PY{c+c1}{\PYZsh{} delete count column because, this column results is not right}
+         \PY{k}{del} \PY{n}{cat\PYZus{}describe}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{} give name to index}
+         \PY{n}{cat\PYZus{}describe}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Features}\PY{l+s+s2}{\PYZdq{}}
+         \PY{c+c1}{\PYZsh{} testing}
+         \PY{n}{cat\PYZus{}describe}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}38}]:}                unique                  top   freq
+         Features                                         
+         workclass           9              Private  21576
+         education          16              HS-grad   9976
+         marital-status      7   Married-civ-spouse  14201
+         occupation         15       Prof-specialty   3932
+         relationship        6              Husband  12496
+         race                5                White  26442
+         sex                 2                 Male  20705
+         native-country     42        United-States  27719
+         target              2                <=50K  23506
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{c+c1}{\PYZsh{} required categorical features\PYZsq{} lists}
+         \PY{n}{count}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{n}{missing\PYZus{}value}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{n}{second\PYZus{}mode}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{n}{second\PYZus{}count}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{n}{mode\PYZus{}percentage}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         \PY{n}{second\PYZus{}mode\PYZus{}percentage}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} fill lists}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{cat\PYZus{}features}\PY{p}{:}
+             \PY{n}{count}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{30940}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{n}{categorical}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ ?}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n}{missing\PYZus{}value}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{categorical}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ ?}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{30940}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}
+             \PY{n}{mode\PYZus{}percentage}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{categorical}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}
+                                             \PY{n}{head}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{30940}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}
+             \PY{n}{second\PYZus{}mode}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{categorical}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{n}{second\PYZus{}count}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{categorical}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{n}{second\PYZus{}mode\PYZus{}percentage}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{categorical}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}
+                                           \PY{n}{head}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{30940}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} append lists to dataframe}
+         \PY{n}{cat\PYZus{}describe}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{count}
+         \PY{n}{cat\PYZus{}describe}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Missing }\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{missing\PYZus{}value}
+         \PY{n}{cat\PYZus{}describe}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mode }\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{mode\PYZus{}percentage}
+         \PY{n}{cat\PYZus{}describe}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2nd Mode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{second\PYZus{}mode}
+         \PY{n}{cat\PYZus{}describe}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2nd Mode Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{second\PYZus{}count}
+         \PY{n}{cat\PYZus{}describe}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2nd Mode }\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{second\PYZus{}mode\PYZus{}percentage}
+         
+         \PY{c+c1}{\PYZsh{} testing}
+         \PY{n}{cat\PYZus{}describe}
+             
+             
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:}                unique                  top   freq  Count  Missing \%  \textbackslash{}
+         Features                                                              
+         workclass           9              Private  21576  29205   5.607628   
+         education          16              HS-grad   9976  30940   0.000000   
+         marital-status      7   Married-civ-spouse  14201  30940   0.000000   
+         occupation         15       Prof-specialty   3932  29198   5.630252   
+         relationship        6              Husband  12496  30940   0.000000   
+         race                5                White  26442  30940   0.000000   
+         sex                 2                 Male  20705  30940   0.000000   
+         native-country     42        United-States  27719  30386   1.790562   
+         target              2                <=50K  23506  30940   0.000000   
+         
+                            Mode \%           2nd Mode  2nd Mode Count  2nd Mode \%  
+         Features                                                                  
+         workclass       69.734971   Self-emp-not-inc            2406    7.776341  
+         education       32.243051       Some-college            6938   22.424047  
+         marital-status  45.898513      Never-married           10167   32.860375  
+         occupation      12.708468       Craft-repair            3887   12.563025  
+         relationship    40.387847      Not-in-family            7904   25.546218  
+         race            85.462185              Black            2965    9.583064  
+         sex             66.919845             Female           10235   33.080155  
+         native-country  89.589528             Mexico             607    1.961862  
+         target          75.972851               >50K            7434   24.027149  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{c+c1}{\PYZsh{} ordering of the column names }
+         \PY{n}{df\PYZus{}cat} \PY{o}{=} \PY{n}{cat\PYZus{}describe}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Missing }\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{unique}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{top}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{freq}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mode }\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2nd Mode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2nd Mode Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2nd Mode }\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+         \PY{n}{df\PYZus{}cat}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ Missing}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cardinality}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mode Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                           \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mode }\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2nd Mode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2nd Mode Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2nd Mode }\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         
+         \PY{c+c1}{\PYZsh{} send dataframe to .csv file}
+         \PY{n}{df\PYZus{}cat}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D14122782CAT.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} final result}
+         \PY{n}{df\PYZus{}cat}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}40}]:}                 Count  \% Missing Cardinality                 Mode Mode Count  \textbackslash{}
+         Features                                                                       
+         workclass       29205   5.607628           9              Private      21576   
+         education       30940   0.000000          16              HS-grad       9976   
+         marital-status  30940   0.000000           7   Married-civ-spouse      14201   
+         occupation      29198   5.630252          15       Prof-specialty       3932   
+         relationship    30940   0.000000           6              Husband      12496   
+         race            30940   0.000000           5                White      26442   
+         sex             30940   0.000000           2                 Male      20705   
+         native-country  30386   1.790562          42        United-States      27719   
+         target          30940   0.000000           2                <=50K      23506   
+         
+                            Mode \%           2nd Mode  2nd Mode Count  2nd Mode \%  
+         Features                                                                  
+         workclass       69.734971   Self-emp-not-inc            2406    7.776341  
+         education       32.243051       Some-college            6938   22.424047  
+         marital-status  45.898513      Never-married           10167   32.860375  
+         occupation      12.708468       Craft-repair            3887   12.563025  
+         relationship    40.387847      Not-in-family            7904   25.546218  
+         race            85.462185              Black            2965    9.583064  
+         sex             66.919845             Female           10235   33.080155  
+         native-country  89.589528             Mexico             607    1.961862  
+         target          75.972851               >50K            7434   24.027149  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} \PYZsq{}\PYZpc{} Missing\PYZsq{} values are not bigger than 5 percent, that is why,they can be}
+        \PY{c+c1}{\PYZsh{} replaced with the mean of the columns}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
